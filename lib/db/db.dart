@@ -1,5 +1,6 @@
 // ignore: depend_on_referenced_packages
 
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import "model.dart";
@@ -26,8 +27,11 @@ class DbService {
   Future<List<DataModel>> get() async {
     final db = await initilaize();
 
-    final List<Map<String, Object?>> dataMap = await db.query("Sessions");
+    // final List<Map<String, Object?>> dataMap = await db.query("Sessions");
+    final List<Map<String, Object?>> dataMap = await db
+        .rawQuery("SELECT * from Sessions WHERE date >= date('now','-6 days')");
 
+    // print(dataMp);
     return [
       for (final {"date": date as String, "hours": hours as double} in dataMap)
         DataModel(date: date, hours: hours)
@@ -66,6 +70,12 @@ class DbService {
     List<Map<String, dynamic>> data =
         await db.query('Sessions', where: "date = ?", whereArgs: [today]);
 
+    List<Map<String, dynamic>> data2 =
+        await db.query('Sessions', where: "date = ?", whereArgs: [today]);
+
+    if (data2.isEmpty) {
+      await db.insert('Sessions', {'date': today, 'hours': 0});
+    }
     return data[0]['hours'];
   }
 

@@ -18,11 +18,17 @@ class AppData extends ChangeNotifier {
   int lBreak = 15;
   int sesCount = 0;
 
+  bool started = false;
   bool vib = false;
   bool rest = false;
 
   void handleTimer(int duration) {
     timer = duration;
+    notifyListeners();
+  }
+
+  void setStarted(bool val) {
+    started = val;
     notifyListeners();
   }
 
@@ -102,7 +108,7 @@ class _MainAppState extends State<MainApp> {
                     background: const Color.fromRGBO(30, 34, 64, 1),
                     secondary: context.watch<AppData>().rest
                         ? Colors.green
-                        : Color.fromARGB(255, 255, 91, 91),
+                        : const Color.fromARGB(255, 255, 91, 91),
                     onBackground: Colors.deepPurpleAccent),
                 textTheme: TextTheme(
                     bodyMedium: GoogleFonts.montserrat(
@@ -112,6 +118,9 @@ class _MainAppState extends State<MainApp> {
                     child: Container(
                   // padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                   child: PageView(
+                    physics: context.watch<AppData>().started
+                        ? const NeverScrollableScrollPhysics()
+                        : const ScrollPhysics(),
                     scrollBehavior: const MaterialScrollBehavior(),
                     controller: controller,
                     children: const <Widget>[
@@ -129,6 +138,9 @@ class _MainAppState extends State<MainApp> {
                 bottomNavigationBar: Container(
                   margin: const EdgeInsets.only(bottom: 20),
                   child: DotNavigationBar(
+                    unselectedItemColor: Provider.of<AppData>(context).started
+                        ? Color(0xFF867E7E)
+                        : Color(0xFFFFFFFF),
                     enableFloatingNavBar: true,
                     backgroundColor: const Color.fromRGBO(70, 76, 119, 1),
                     marginR:
@@ -137,19 +149,22 @@ class _MainAppState extends State<MainApp> {
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     currentIndex: current,
                     onTap: (p) {
-                      setState(() {
-                        current = p;
-                        controller.animateToPage(p,
-                            duration: const Duration(milliseconds: 450),
-                            curve: Curves.easeInOut);
-                      });
+                      if (!Provider.of<AppData>(context, listen: false)
+                          .started) {
+                        setState(() {
+                          current = p;
+                          controller.animateToPage(p,
+                              duration: const Duration(milliseconds: 450),
+                              curve: Curves.easeInOut);
+                        });
+                      }
                     },
                     // dotIndicatorColor: Colors.black,
                     items: [
                       /// Home
                       DotNavigationBarItem(
                         icon: const Icon(Icons.timer),
-                        selectedColor: const Color(0xFFF87070),
+                        selectedColor: Color(0xFFF87070),
                       ),
 
                       DotNavigationBarItem(

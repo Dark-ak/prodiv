@@ -29,8 +29,8 @@ class Stats extends StatelessWidget {
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         constraints: const BoxConstraints(
-                            minHeight: 130,
-                            maxHeight: 180,
+                            minHeight: 100,
+                            maxHeight: 150,
                             minWidth: 110,
                             maxWidth: 150),
                         decoration: BoxDecoration(
@@ -67,8 +67,8 @@ class Stats extends StatelessWidget {
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         constraints: const BoxConstraints(
-                            minHeight: 130,
-                            maxHeight: 180,
+                            minHeight: 100,
+                            maxHeight: 150,
                             minWidth: 110,
                             maxWidth: 150),
                         decoration: BoxDecoration(
@@ -106,7 +106,7 @@ class Stats extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -114,8 +114,8 @@ class Stats extends StatelessWidget {
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         constraints: const BoxConstraints(
-                            minHeight: 130,
-                            maxHeight: 180,
+                            minHeight: 100,
+                            maxHeight: 150,
                             minWidth: 110,
                             maxWidth: 150),
                         decoration: BoxDecoration(
@@ -153,8 +153,8 @@ class Stats extends StatelessWidget {
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         constraints: const BoxConstraints(
-                            minHeight: 130,
-                            maxHeight: 180,
+                            minHeight: 100,
+                            maxHeight: 150,
                             minWidth: 110,
                             maxWidth: 150),
                         decoration: BoxDecoration(

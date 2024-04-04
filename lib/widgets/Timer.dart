@@ -192,9 +192,9 @@ class _TimerState extends State<Timer> {
                       "Today's session: ${snapshot.data?.toStringAsFixed(1)}hrs",
                       style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.w600),
-                      maxFontSize: 35,
+                      maxFontSize: 30,
                       maxLines: 3,
                       textAlign: TextAlign.center,
                     ),
@@ -208,7 +208,7 @@ class _TimerState extends State<Timer> {
           const SizedBox(
             height: 30,
           ),
-          started
+          data.started
               ? running
                   ? Column(
                       children: [
@@ -220,7 +220,7 @@ class _TimerState extends State<Timer> {
                                     BorderSide(color: Colors.red, width: 2)),
                                 padding: MaterialStatePropertyAll(
                                     EdgeInsets.symmetric(
-                                        vertical: 14, horizontal: 60))),
+                                        vertical: 10, horizontal: 40))),
                             onPressed: () => setState(() {
                                   running = false;
                                   _controller.pause();
@@ -229,10 +229,13 @@ class _TimerState extends State<Timer> {
                               Icons.pause,
                               color: Colors.white,
                             ),
-                            label: const Text(
+                            label: const AutoSizeText(
                               "Pause",
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.white),
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.white,
+                              ),
+                              maxFontSize: 30,
                             ))
                       ],
                     )
@@ -246,14 +249,14 @@ class _TimerState extends State<Timer> {
                                     BorderSide(color: Colors.white, width: 2)),
                                 padding: const MaterialStatePropertyAll(
                                     EdgeInsets.symmetric(
-                                        vertical: 14, horizontal: 60))),
+                                        vertical: 10, horizontal: 40))),
                             onPressed: () => setState(() {
                                   if (data.rest) {
                                     data.restStat();
                                   } else {
                                     addTime(data.timer);
                                   }
-                                  started = false;
+                                  data.setStarted(false);
                                   reset = true;
                                   running = false;
                                   _controller.reset();
@@ -262,10 +265,13 @@ class _TimerState extends State<Timer> {
                               Icons.restart_alt,
                               color: Colors.white,
                             ),
-                            label: const Text(
-                              "Reset",
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.white),
+                            label: const AutoSizeText(
+                              "Restart",
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.white,
+                              ),
+                              maxFontSize: 30,
                             )),
                         const SizedBox(
                           height: 20,
@@ -276,7 +282,7 @@ class _TimerState extends State<Timer> {
                                     Theme.of(context).colorScheme.secondary),
                                 padding: const MaterialStatePropertyAll(
                                     EdgeInsets.symmetric(
-                                        vertical: 14, horizontal: 60))),
+                                        vertical: 10, horizontal: 40))),
                             onPressed: () => setState(() {
                                   running = true;
                                   _controller.resume();
@@ -285,10 +291,13 @@ class _TimerState extends State<Timer> {
                               Icons.play_arrow,
                               color: Colors.white,
                             ),
-                            label: const Text(
+                            label: const AutoSizeText(
                               "Resume",
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.white),
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.white,
+                              ),
+                              maxFontSize: 30,
                             )),
                       ],
                     )
@@ -297,23 +306,27 @@ class _TimerState extends State<Timer> {
                       backgroundColor: MaterialStatePropertyAll(
                           Theme.of(context).colorScheme.secondary),
                       padding: const MaterialStatePropertyAll(
-                          EdgeInsets.symmetric(vertical: 14, horizontal: 60))),
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 40))),
                   onPressed: () => setState(() {
-                    started = true;
-                    reset = false;
-                    _controller.start();
-                    vibrate();
-                    running = true;
-                  }),
+                        data.setStarted(true);
+                        reset = false;
+                        _controller.start();
+                        vibrate();
+                        running = true;
+                      }),
                   icon: const Icon(
                     Icons.play_arrow,
+                    opticalSize: 2,
                     color: Colors.white,
                   ),
-                  label: const Text(
+                  label: const AutoSizeText(
                     "Start",
-                    style: TextStyle(fontSize: 25, color: Colors.white),
-                  ),
-                )
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                    maxFontSize: 30,
+                  ))
         ],
       );
     });
