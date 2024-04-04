@@ -19,44 +19,58 @@ class Stats extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data;
+            final scale = MediaQuery.of(context).textScaler;
+            print(scale);
             return Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                        constraints: const BoxConstraints(maxHeight: 130),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        constraints: const BoxConstraints(
+                            minHeight: 130,
+                            maxHeight: 180,
+                            minWidth: 110,
+                            maxWidth: 150),
                         decoration: BoxDecoration(
                             border: Border.all(
                               color: Colors.blueGrey.shade400,
                             ),
                             borderRadius: BorderRadius.circular(15)),
-                        width: 160,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const AutoSizeText(
-                              "Longest Session",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                              maxFontSize: 20,
-                              minFontSize: 16,
-                            ),
-                            Text(
+                            const AutoSizeText("Longest Session ",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600),
+                                maxFontSize: 25,
+                                minFontSize: 16,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis),
+                            AutoSizeText(
                               "${data!['max']!.toStringAsFixed(2)} hrs",
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                              ),
-                            ),
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w400),
+                              maxFontSize: 25,
+                              minFontSize: 16,
+                              maxLines: 1,
+                            )
                           ],
                         )),
                     Container(
-                        constraints: const BoxConstraints(maxHeight: 130),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        constraints: const BoxConstraints(
+                            minHeight: 130,
+                            maxHeight: 180,
+                            minWidth: 110,
+                            maxWidth: 150),
                         decoration: BoxDecoration(
                             border: Border.all(
                               color: Colors.blueGrey.shade400,
@@ -66,22 +80,27 @@ class Stats extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
-                              "Average Session",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "${data!['avg']!.toStringAsFixed(2)}hrs",
+                            const AutoSizeText("Avg. Session ",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600),
+                                maxFontSize: 25,
+                                minFontSize: 16,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis),
+                            AutoSizeText(
+                              "${data['avg']!.toStringAsFixed(2)} hrs",
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                              ),
-                            ),
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w400),
+                              maxFontSize: 25,
+                              minFontSize: 16,
+                              maxLines: 1,
+                            )
                           ],
                         )),
                   ],
@@ -93,7 +112,12 @@ class Stats extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                        constraints: const BoxConstraints(maxHeight: 130),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        constraints: const BoxConstraints(
+                            minHeight: 130,
+                            maxHeight: 180,
+                            minWidth: 110,
+                            maxWidth: 150),
                         decoration: BoxDecoration(
                             border: Border.all(
                               color: Colors.blueGrey.shade400,
@@ -103,26 +127,36 @@ class Stats extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
-                              "Weekly Average",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "${data['weekAvg']!.toStringAsFixed(2)}hrs",
+                            const AutoSizeText("Weekly Avg. ",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600),
+                                maxFontSize: 25,
+                                minFontSize: 16,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis),
+                            AutoSizeText(
+                              "${data['weekAvg']!.toStringAsFixed(2)} hrs",
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                              ),
-                            ),
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w400),
+                              maxFontSize: 25,
+                              minFontSize: 16,
+                              maxLines: 1,
+                            )
                           ],
                         )),
                     Container(
-                        constraints: const BoxConstraints(maxHeight: 130),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        constraints: const BoxConstraints(
+                            minHeight: 130,
+                            maxHeight: 180,
+                            minWidth: 110,
+                            maxWidth: 150),
                         decoration: BoxDecoration(
                             border: Border.all(
                               color: Colors.blueGrey.shade400,
@@ -132,22 +166,27 @@ class Stats extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
-                              "Monthly Average",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "${data['monthAvg']!.toStringAsFixed(2)}hrs",
+                            const AutoSizeText("Monthly Avg.",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600),
+                                maxFontSize: 25,
+                                minFontSize: 16,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis),
+                            AutoSizeText(
+                              "${data['monthAvg']!.toStringAsFixed(2)} hrs",
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                              ),
-                            ),
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w400),
+                              maxFontSize: 25,
+                              minFontSize: 16,
+                              maxLines: 1,
+                            )
                           ],
                         )),
                   ],

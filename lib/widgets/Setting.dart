@@ -40,7 +40,7 @@ class _SettingsState extends State<Settings> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text(
-                          "Pomodoro Timer",
+                          "Timer",
                           style: TextStyle(color: Colors.white, fontSize: 22),
                         ),
                         Container(

@@ -4,6 +4,7 @@ import "package:flutter/material.dart";
 // import "package:flutter/services.dart";
 import "../db/db.dart";
 import "package:prodive/main.dart";
+import "package:auto_size_text/auto_size_text.dart";
 import "package:provider/provider.dart";
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:just_audio/just_audio.dart';
@@ -63,15 +64,16 @@ class _TimerState extends State<Timer> {
   Widget build(BuildContext context) {
     return Consumer<AppData>(builder: (context, data, child) {
       final size = MediaQuery.of(context).size;
+      // final textFactor = MediaQuery.of(context).textScaler.clamp();
       final width = size.width;
       final height = size.height;
       // print(width);
-      // print(height);
+      // print(textFactor);
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 280,
+            width: 400,
             padding: const EdgeInsets.all(30),
             decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
@@ -96,10 +98,10 @@ class _TimerState extends State<Timer> {
               controller: _controller,
 
               // Width of the Countdown Widget.
-              width: 200,
+              width: 260,
 
               // Height of the Countdown Widget.
-              height: 250,
+              height: width * 0.6,
 
               // Ring Color for Countdown Widget.
               ringColor: Theme.of(context).colorScheme.onPrimary,
@@ -124,7 +126,7 @@ class _TimerState extends State<Timer> {
 
               // Text Style for Countdown Text.
               textStyle: const TextStyle(
-                fontSize: 50,
+                fontSize: 55,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
@@ -171,8 +173,8 @@ class _TimerState extends State<Timer> {
               },
             ),
           ),
-          const SizedBox(
-            height: 40,
+          SizedBox(
+            height: height * 0.04,
           ),
           FutureBuilder(
               future: db.getToday(),
@@ -182,28 +184,20 @@ class _TimerState extends State<Timer> {
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 40),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
+                        horizontal: 15, vertical: 10),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.white, width: 2)),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Text(
-                            "Today's session:",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            "${snapshot.data?.toStringAsFixed(1)}hrs",
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ]),
+                    child: AutoSizeText(
+                      "Today's session: ${snapshot.data?.toStringAsFixed(1)}hrs",
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600),
+                      maxFontSize: 35,
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
                   );
                 } else {
                   return const Center(
@@ -212,7 +206,7 @@ class _TimerState extends State<Timer> {
                 }
               }),
           const SizedBox(
-            height: 40,
+            height: 30,
           ),
           started
               ? running
